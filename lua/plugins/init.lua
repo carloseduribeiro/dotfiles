@@ -241,6 +241,12 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
+
+  -- 
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    lazy = false,
+  }
 }
 
 local config = require("core.utils").load_config()

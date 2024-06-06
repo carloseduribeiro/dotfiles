@@ -36,3 +36,10 @@ https://github.com/go-delve/delve
 ```:GoTestsAll```       gera testes baseado em um boilerplate  
 
 Mais info.: https://github.com/olexsmir/gopher.nvim
+
+## Atalhos interessantes
+
+```*```     busca pela próxima ocorrência da palavra sobre o cursor
+```#```     busca pela ocorrência anterior da palavra sobre o cursor
+```n```     navega para a próxima palavra na pesquisa com ```/```
+```N```     navega para a palavra anterior na pesquisa com ```/```

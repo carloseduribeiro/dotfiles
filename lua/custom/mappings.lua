@@ -50,4 +50,16 @@ M.gopher = {
   }
 }
 
+M.buffers = {
+  plugin = true,
+  n = {
+    ["<A-cb>"] = {
+      function()
+        require("nvchad.tabufline").closeAllBufs()
+      end,
+      "Close all buffers"
+    }
+  }
+}
+
 return M
