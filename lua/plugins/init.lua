@@ -242,11 +242,17 @@ local default_plugins = {
     end,
   },
 
-  -- 
+  -- Rainbow delimiters 
   {
     "HiPhish/rainbow-delimiters.nvim",
     lazy = false,
-  }
+  },
+
+  -- Github Copilot
+  {
+    "github/copilot.vim",
+    lazy = false,
+  },
 }
 
 local config = require("core.utils").load_config()
