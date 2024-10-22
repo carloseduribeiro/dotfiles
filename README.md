@@ -1,5 +1,7 @@
 # NeoVim
 
+This repo contains my personal development environment with NeoVim and how to configure it.
+
 ## Folder structure
 
 ```
@@ -14,9 +16,12 @@
 
 ## Get Started
 
+* Install [asdf](_
+
 1. Install [NeoVim](https://github.com/neovim/neovim/blob/master/INSTALL.md).
 2. Install [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 ## Plugins
 
-* [go.nvim](https://github.com/ray-x/go.nvim)
+* [mason.nvim](https://github.com/williamboman/mason.nvim)
+* 
