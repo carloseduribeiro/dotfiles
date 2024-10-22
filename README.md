@@ -1,5 +1,17 @@
 # NeoVim
 
+## Folder structure
+
+```
+.
+└── lua
+    ├── config              # General Neovim options
+    └── plugins
+        ├── appearence      # Themes, status lines, etc
+        ├── lsp             # LSP configs
+        └── productivity    # Fuzzy finders, linters, debuggers, etc
+```
+
 ## Get Started
 
 1. Install [NeoVim](https://github.com/neovim/neovim/blob/master/INSTALL.md).
