@@ -32,37 +32,22 @@ return {
 				local buf = vim.lsp.buf
 				local diagnostic = vim.diagnostic
 
-				keymap("n", "gr", buf.references,
-					vim.tbl_extend("force", opts, { desc = "LSP Goto Reference" }))
-				keymap("n", "gd", buf.definition,
-					vim.tbl_extend("force", opts, { desc = "LSP Goto Definition" }))
-				keymap("n", "K", buf.hover, vim.tbl_extend("force", opts, { desc = "LSP Hover" }))
-				keymap("n", "<leader>vws", buf.workspace_symbol,
-					vim.tbl_extend("force", opts, { desc = "LSP Workspace Symbol" }))
-				keymap("n", "<leader>vd", diagnostic.setloclist,
-					vim.tbl_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-				keymap("n", "[d", diagnostic.goto_next,
-					vim.tbl_extend("force", opts, { desc = "Next Diagnostic" }))
-				keymap("n", "]d", diagnostic.goto_prev,
-					vim.tbl_extend("force", opts, { desc = "Previous Diagnostic" }))
-				keymap("n", "<leader>vca", buf.code_action,
-					vim.tbl_extend("force", opts, { desc = "LSP Code Action" }))
-				keymap("n", "<leader>vrn", buf.rename,
-					vim.tbl_extend("force", opts, { desc = "LSP Rename" }))
-				keymap("i", "<C-h>", buf.signature_help,
-					vim.tbl_extend("force", opts, { desc = "LSP Signature Help" }))
+				-- keymap("n", "gr", buf.references, vim.tbl_extend("force", opts, { desc = "LSP Goto Reference" }))
+				-- keymap("n", "gd", buf.definition, vim.tbl_extend("force", opts, { desc = "LSP Goto Definition" }))
+				-- keymap("n", "K", buf.hover, vim.tbl_extend("force", opts, { desc = "LSP Hover" }))
+				-- keymap("n", "<leader>vws", buf.workspace_symbol, vim.tbl_extend("force", opts, { desc = "LSP Workspace Symbol" }))
+				-- keymap("n", "<leader>vd", diagnostic.setloclist, vim.tbl_extend("force", opts, { desc = "LSP Show Diagnostics" }))
+				-- keymap("n", "[d", diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next Diagnostic" }))
+				-- keymap("n", "]d", diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Previous Diagnostic" }))
+				-- keymap("n", "<leader>vca", buf.code_action, vim.tbl_extend("force", opts, { desc = "LSP Code Action" }))
+				-- keymap("n", "<leader>vrn", buf.rename, vim.tbl_extend("force", opts, { desc = "LSP Rename" }))
+				-- keymap("i", "<C-h>", buf.signature_help, vim.tbl_extend("force", opts, { desc = "LSP Signature Help" }))
 			end
 
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"jsonnet_ls",
-					"yamlls",
-					"bashls",
-					"dockerls",
-					"marksman",
 					"gopls",
-					"pylsp",
 					"lua_ls",
 					--
 				},

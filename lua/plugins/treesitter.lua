@@ -5,13 +5,8 @@ return {
 		local configs = require("nvim-treesitter.configs")
 		configs.setup({
 			ensure_installed = {
-				"jsonnet",
 				"yaml",
-				"bash",
-				"dockerfile",
-				"markdown",
 				"go",
-				"python",
 				"lua",
 				--
 				"vim",
