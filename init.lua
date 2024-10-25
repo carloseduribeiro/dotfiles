@@ -22,8 +22,8 @@ require('lazy').setup {
     require 'plugins.telescope',
     require 'plugins.lsp',
     require 'plugins.autocompletion',
-    require 'lua.plugins.autoformatting',
-    require 'lua.plugins.gitsigns',
-    require 'lua.plugins.alpha',
-    require 'lua.plugins.indent-blankline',
+    require 'plugins.autoformatting',
+    require 'plugins.gitsigns',
+    require 'plugins.alpha',
+    require 'plugins.indent-blankline',
 }
