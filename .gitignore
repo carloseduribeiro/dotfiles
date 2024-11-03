@@ -1,2 +1,5 @@
 ### Project
 lazy-lock.json
+
+### Vim files
+*.un~
