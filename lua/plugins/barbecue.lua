@@ -11,6 +11,7 @@ return {
         vim.opt.updatetime = 200
         require('barbecue').setup {
             create_autocmd = false, -- prevent barbecue from updating itself automatically
+            theme = 'onedark-darker',
         }
         vim.api.nvim_create_autocmd({
             'WinResized',
