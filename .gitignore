@@ -1,5 +1,6 @@
 ### Project
 lazy-lock.json
+.config/alacritty/alacritty-theme
 
 ### Vim files
 *.un~
