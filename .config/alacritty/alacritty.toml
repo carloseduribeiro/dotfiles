@@ -2,7 +2,8 @@ general.live_config_reload = true
 
 general.import = [
     # "~/.config/alacritty/themes/catppuccin_mocha.toml"
-    "~/.config/alacritty/themes/one_dark.toml"
+    #"~/.config/alacritty/themes/one_dark.toml"
+    "~/.config/alacritty/themes/dracula_plus.toml"
 ]
 
 [env]
