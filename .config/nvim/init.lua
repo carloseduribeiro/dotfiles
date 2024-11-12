@@ -28,4 +28,5 @@ require('lazy').setup {
     require 'plugins.indent-blankline',
     require 'plugins.barbecue',
     require 'plugins.persistence',
+    require 'plugins.fine-commandline',
 }
