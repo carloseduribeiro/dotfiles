@@ -22,11 +22,12 @@ require('lazy').setup {
     require 'plugins.telescope',
     require 'plugins.lsp',
     require 'plugins.autocompletion',
-    require 'plugins.autoformatting',
     require 'plugins.gitsigns',
     require 'plugins.alpha',
     require 'plugins.indent-blankline',
     require 'plugins.barbecue',
     require 'plugins.persistence',
     require 'plugins.fine-commandline',
+    require 'plugins.conform',
+    require 'plugins.conform-mason',
 }

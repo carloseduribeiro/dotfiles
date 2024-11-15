@@ -166,29 +166,29 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
-            ruff = {},
-            pylsp = {
-                settings = {
-                    pylsp = {
-                        plugins = {
-                            pyflakes = { enabled = false },
-                            pycodestyle = { enabled = false },
-                            autopep8 = { enabled = false },
-                            yapf = { enabled = false },
-                            mccabe = { enabled = false },
-                            pylsp_mypy = { enabled = false },
-                            pylsp_black = { enabled = false },
-                            pylsp_isort = { enabled = false },
-                        },
-                    },
-                },
-            },
+            -- ruff = {}, -- python linter written in rust
+            --pylsp = {
+            --    settings = {
+            --        pylsp = {
+            --            plugins = {
+            --                pyflakes = { enabled = false },
+            --                pycodestyle = { enabled = false },
+            --                autopep8 = { enabled = false },
+            --                yapf = { enabled = false },
+            --                mccabe = { enabled = false },
+            --                pylsp_mypy = { enabled = false },
+            --                pylsp_black = { enabled = false },
+            --                pylsp_isort = { enabled = false },
+            --            },
+            --        },
+            --    },
+            --},
             -- html = { filetypes = { 'html', 'twig', 'hbs' } },
             -- cssls = {},
             -- tailwindcss = {},
             dockerls = {},
             sqlls = {},
-            terraformls = {},
+            --terraformls = {},
             jsonls = {},
             yamlls = {},
 
