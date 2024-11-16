@@ -1,7 +1,10 @@
-return { -- Autocompletion
+-- Autocompletion
+return {
     'hrsh7th/nvim-cmp',
     dependencies = {
-        -- Snippet Engine & its associated nvim-cmp source
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
         {
             'L3MON4D3/LuaSnip',
             build = (function()
@@ -25,14 +28,7 @@ return { -- Autocompletion
                 },
             },
         },
-        'saadparwaiz1/cmp_luasnip',
-
-        -- Adds other completion capabilities.
-        --  nvim-cmp does not ship with all sources by default. They are split
-        --  into multiple repos for maintenance purposes.
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
+        { 'saadparwaiz1/cmp_luasnip', enabled = true },
 
         -- It allow us to enable and disabel auto completion:
         {
@@ -86,17 +82,20 @@ return { -- Autocompletion
                 completeopt = 'menu,menuone,noinsert',
             },
             mapping = cmp.mapping.preset.insert {
+                -- Scroll the documentation window [b]ack / [f]orward
+                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
                 -- Manually trigger a completion from nvim-cmp.
                 ['<C-Space>'] = cmp.mapping.complete {},
+
+                -- Abort
+                ['<C-e>'] = cmp.mapping.abort {},
 
                 -- Select the [n]ext item
                 ['<C-n>'] = cmp.mapping.select_next_item(),
                 -- Select the [p]revious item
                 ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-                -- Scroll the documentation window [b]ack / [f]orward
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
                 -- Accept ([y]es) the completion.
                 --  This will auto-import if your LSP supports it.
@@ -165,6 +164,8 @@ return { -- Autocompletion
                         buffer = '[Buffer]',
                         path = '[Path]',
                     })[entry.source.name]
+                    vim_item.mode = 'symbol_text'
+                    vim_item.show_labelDetails = true
                     return vim_item
                 end,
             },

@@ -24,7 +24,7 @@ return {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 sql = { 'sql_formatter', 'sqlfmt', stop_after_first = true },
-                go = { 'goimports', 'gofmt' },
+                -- go = { 'goimports', 'gofmt' },
             },
             -- Customize formatters
             formatters = {

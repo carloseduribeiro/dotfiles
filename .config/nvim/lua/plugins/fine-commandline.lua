@@ -18,7 +18,7 @@ return {
                 },
             },
             hooks = {
-                set_keymaps = function(imap, feedkeys)
+                set_keymaps = function(imap, _)
                     -- defaults:
                     imap('<Esc>', fn.close)
                     imap('<C-c>', fn.close)
