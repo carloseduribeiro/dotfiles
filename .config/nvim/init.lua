@@ -30,4 +30,5 @@ require('lazy').setup {
     require 'plugins.fine-commandline',
     require 'plugins.conform',
     require 'plugins.dap',
+    require 'plugins.noice',
 }
