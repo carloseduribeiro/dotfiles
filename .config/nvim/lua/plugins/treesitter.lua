@@ -13,7 +13,7 @@ return {
         -- treesitter-context is buggy with Markdown files so this disable it:
         vim.api.nvim_create_autocmd('FileType', {
             pattern = { 'markdown' },
-            callback = function(ev)
+            callback = function(_)
                 require('treesitter-context').disable()
             end,
         })

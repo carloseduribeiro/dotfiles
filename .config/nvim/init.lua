@@ -29,4 +29,5 @@ require('lazy').setup {
     require 'plugins.persistence',
     require 'plugins.fine-commandline',
     require 'plugins.conform',
+    require 'plugins.dap',
 }
