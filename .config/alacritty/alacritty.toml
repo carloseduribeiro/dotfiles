@@ -14,7 +14,7 @@ decorations = "buttonless"
 dynamic_padding = false
 opacity = 0.9
 blur = true
-startup_mode = "Maximized"
+startup_mode = "Maximized"   # Windowed | Maximized | Fullscreen | SimpleFullscreen
 
 [window.dimensions]
 columns = 200
@@ -25,8 +25,7 @@ x = 5
 y = 5
 
 [font]
-size = 14
-
+size = 15
 
 [font.bold]
 family = "MesloLGS Nerd Font Mono"
