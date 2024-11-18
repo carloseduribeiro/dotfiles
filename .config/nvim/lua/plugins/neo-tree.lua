@@ -196,7 +196,12 @@ return {
                     ['i'] = 'show_file_details',
                 },
             },
-            nesting_rules = {},
+            nesting_rules = {
+                ['go'] = {
+                    pattern = '(.*)%.go$', -- <-- Lua pattern with capture
+                    files = { '%1_test.go' }, -- <-- glob pattern with capture
+                },
+            },
             filesystem = {
                 filtered_items = {
                     visible = false, -- when true, they will just be displayed differently than normal items
