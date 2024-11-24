@@ -1,5 +1,5 @@
-require 'core.options'
-require 'core.keymaps'
+require 'config.options'
+require 'config.keymaps'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -26,7 +26,8 @@ require('lazy').setup {
     require 'plugins.autocompletion',
     require 'plugins.gitsigns',
     require 'plugins.alpha',
-    require 'plugins.indent-blankline',
+    require 'plugins.indent-blankline', -- todo: joint indent-blankline and rainbown-delimiters
+    require 'plugins.rainbown-delimiters',
     require 'plugins.barbecue',
     require 'plugins.persistence',
     require 'plugins.fine-commandline',

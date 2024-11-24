@@ -35,7 +35,7 @@ return {
         {
             'gitaarik/nvim-cmp-toggle',
             config = function()
-                -- vim.api.nvim_set_keymap('n', '<Leader>ac', ':NvimCmpToggle<CR>', { noremap = true, silent = true })
+                vim.api.nvim_set_keymap('n', '<leader>ac', ':NvimCmpToggle<CR>', { desc = 'Toggle autocompletion', noremap = true, silent = true })
             end,
         },
     },
