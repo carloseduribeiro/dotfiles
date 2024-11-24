@@ -35,11 +35,11 @@ return {
 
         require('neo-tree').setup {
             close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-            popup_border_style = 'rounded',
+            popup_border_style = 'single',
             enable_git_status = true,
             enable_diagnostics = true,
             open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-            sort_case_insensitive = false, -- used when sorting files and directories in the tree
+            sort_case_insensitive = true, -- used when sorting files and directories in the tree
             sort_function = nil, -- use a custom function for sorting files and directories in the tree
             -- sort_function = function (a,b)
             --       if a.type == b.type then
@@ -70,7 +70,7 @@ return {
                     folder_closed = '',
                     folder_open = '',
                     folder_empty = '󰜌',
-                    provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
+                    provider = function(icon, node, _) -- default icon provider utilizes nvim-web-devicons if available
                         if node.type == 'file' or node.type == 'terminal' then
                             local success, web_devicons = pcall(require, 'nvim-web-devicons')
                             local name = node.type == 'terminal' and 'terminal' or node.name
@@ -98,10 +98,10 @@ return {
                 git_status = {
                     symbols = {
                         -- Change type
-                        added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
-                        modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-                        deleted = '✖', -- this can only be used in the git_status source
-                        renamed = '󰁕', -- this can only be used in the git_status source
+                        added = '', -- or "✚ or ", but this is redundant info if you use git_status_colors on the name
+                        modified = '', -- or " or ", but this is redundant info if you use git_status_colors on the name
+                        deleted = '', -- this can only be used in the git_status source
+                        renamed = '', -- this can only be used in the git_status source
                         -- Status type
                         untracked = '',
                         ignored = '',
@@ -322,7 +322,6 @@ return {
             },
         }
 
-        vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
         vim.keymap.set('n', '<leader>e', ':Neotree toggle position=left<CR>', { noremap = true, silent = true }) -- focus file explorer
         vim.keymap.set('n', '<leader>ngs', ':Neotree float git_status<CR>', { noremap = true, silent = true }) -- open git status window
     end,

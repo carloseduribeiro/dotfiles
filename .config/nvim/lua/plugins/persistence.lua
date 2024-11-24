@@ -10,12 +10,12 @@ return {
         -- * git commit/rebase session
         autoload = true,
     },
-		-- stylua: ignore
-		keys = {
-			{ '<leader>qs', function() require('persistence').load() end, desc = 'Restore Session' },
-			{ '<leader>ql', function() require('persistence').load({ last = true }) end, desc = 'Restore Last Session' },
-            { '<leader>qd', function() require('persistence').stop() end, desc = 'Don\'t Save Current Session' },
-		},
+    -- stylua: ignore
+    keys = {
+        { '<leader>qs', function() require('persistence').load() end, desc = 'Restore Session' },
+        { '<leader>ql', function() require('persistence').load({ last = true }) end, desc = 'Restore Last Session' },
+        { '<leader>qd', function() require('persistence').stop() end, desc = 'Don\'t Save Current Session' },
+    },
     init = function()
         -- Detect if stdin has been provided.
         vim.g.started_with_stdin = false
