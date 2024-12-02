@@ -20,17 +20,15 @@ end
 return {
     'mfussenegger/nvim-dap',
     dependencies = {
-        'rcarriga/nvim-dap-ui',
         {
-            'leoluz/nvim-dap-go',
+            'rcarriga/nvim-dap-ui',
+            dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
             config = function()
-                require('dap-go').setup()
+                require('dapui').setup()
             end,
         },
-        {
-            'theHamsta/nvim-dap-virtual-text',
-            opts = {},
-        },
+        { 'leoluz/nvim-dap-go' },
+        { 'theHamsta/nvim-dap-virtual-text' },
         {
             'jay-babu/mason-nvim-dap.nvim',
             dependencies = 'mason.nvim',
@@ -46,45 +44,62 @@ return {
     },
     config = function()
         require('mason-nvim-dap').setup()
-        --vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
-        --local lazyVimIcons = {
-        --    Stopped = { '󰁕 ', 'DiagnosticWarn', 'DapStoppedLine' },
-        --    Breakpoint = ' ',
-        --    BreakpointCondition = ' ',
-        --    BreakpointRejected = { ' ', 'DiagnosticError' },
-        --    LogPoint = '.>',
-        --}
-        --for name, sign in pairs(lazyVimIcons) do
-        --    sign = type(sign) == 'table' and sign or { sign }
-        --    vim.fn.sign_define('Dap' .. name, { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] })
-        --end
+        require('nvim-dap-virtual-text').setup()
 
-        -- setup dap config by VsCode launch.json file
-        local vscode = require 'dap.ext.vscode'
-        local json = require 'plenary.json'
-        vscode.json_decode = function(str)
-            return vim.json.decode(json.json_strip_comments(str))
+        local map = function(keys, func, desc, mode)
+            mode = mode or 'n'
+            vim.keymap.set(mode, keys, func, { desc = 'DAP: ' .. desc })
+        end
+
+        local dap = require 'dap'
+        local widgets = require 'dap.ui.widgets'
+
+        -- Keymaps
+        -- stylua: ignore start
+        map('<F5>', function() dap.continue() end, "Run/Continue")
+        map('<S-F5>', function() dap.continue({ before = get_args }) end, "Run with Args")
+        map('<F6>', function() dap.run_to_cursor() end, "Run to Cursor")
+        map('<F10>', function() dap.step_over() end, "Step Over")
+        map('<F11>', function() dap.step_into() end, "Step Into")
+        map('<F12>', function() dap.step_out() end, "Step Out")
+        map('<leader>b', function() dap.toggle_breakpoint() end, "Toggle Breakpoint")
+        map('<leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, "Set a conditional breakpoint")
+        map('<leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, "Log point message")
+        map('<leader>dr', function() dap.repl.toggle() end, "Toggle REPL")
+        map('<leader>dl', function() dap.run_last() end, "Run Last")
+
+        map('<leader>dh', function() widgets.hover() end, "Evaluates the expression and displays the result in a floating window", {'n', 'v'})
+        map('<leader>dp', function() widgets.preview() end, "Like hover but uses the preview window", {'n', 'v'})
+        map('<leader>df', function() widgets.centered_float(widgets.frames) end, "View current frames in a sidebar", {'n', 'v'})
+        --map('<leader>ds', function() widgets.centered_float(widgets.scopes) end, "Show current scopes", {'n', 'v'})
+
+        map('<leader>dj', function() dap.down() end, "Go down in current stacktrace without stepping")
+        map('<leader>dk', function() dap.up() end, "Go up in current stacktrace without stepping")
+        --map('<leader>ds', function() dap.session() end, "Session")
+        map('<leader>dt', function() dap.terminate() end, "Terminate")
+        -- stylua: ignore end
+
+        local dapui = require 'dapui'
+
+        dapui.setup()
+        -- DAP UI settings
+        dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+        dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+        require('dap-go').setup()
+
+        vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+        local icons = {
+            Stopped = { '󰁕 ', 'DiagnosticWarn', 'DapStoppedLine' },
+            Breakpoint = ' ',
+            BreakpointCondition = ' ',
+            BreakpointRejected = { ' ', 'DiagnosticError' },
+            LogPoint = '.>',
+        }
+        for name, sign in pairs(icons) do
+            sign = type(sign) == 'table' and sign or { sign }
+            vim.fn.sign_define('Dap' .. name, { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] })
         end
     end,
-    -- stylua: ignore
-    keys = {
-        { "<leader>d", "", desc = "+debug", mode = {"n", "v"} },
-        { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-        { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-        { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
-        { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
-        { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-        { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
-        { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-        { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-        { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-        { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-        { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-        { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
-        { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-        { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-        { "<leader>ds", function() require("dap").session() end, desc = "Session" },
-        { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-        { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-    },
 }

@@ -22,6 +22,7 @@ return {
                 lua = { 'stylua' },
                 sql = { 'sql_formatter', 'sqlfmt', stop_after_first = true },
                 go = { 'goimports', 'gofmt' },
+                xml = { 'xmlformat' },
             },
             -- Customize formatters
             formatters = {
@@ -30,6 +31,9 @@ return {
                 },
                 sql_formatter = {
                     prepend_args = { '--language', 'postgresql' },
+                },
+                xmlformat = {
+                    prepend_args = { '--indent 4' },
                 },
             },
             -- Set default options

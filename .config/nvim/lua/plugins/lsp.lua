@@ -68,18 +68,18 @@ return {
                 map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
                 map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
                 map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+                map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
                 -- Jump to the type of the word under your cursor.
                 --  Useful when you're not sure what type a variable is and you want to see
                 --  the definition of its *type*, not where it was *defined*.
                 map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
+                -- conflicts with dap key:
                 map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
                 map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
                 map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame variable under de cursor')
                 map('<leader>ca', vim.lsp.buf.code_action, 'Execute [C]ode [A]ction', { 'n', 'x' })
-
-                map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.

@@ -1,9 +1,11 @@
 return {
     'folke/persistence.nvim',
+    lazy = false,
     event = 'VimEnter',
     opts = {
-        dir = vim.fn.stdpath 'state' .. '/sessions/',
+        dir = vim.fn.expand(vim.fn.stdpath 'state' .. '/sessions/'),
         branch = false,
+        -- options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds', 'localoptions' },
         -- Enable to autoload session on startup, unless:
         -- * neovim was started with files as arguments
         -- * stdin has been provided
@@ -12,15 +14,15 @@ return {
     },
     -- stylua: ignore
     keys = {
-        { '<leader>qs', function() require('persistence').load() end, desc = 'Restore Session' },
-        { '<leader>ql', function() require('persistence').load({ last = true }) end, desc = 'Restore Last Session' },
-        { '<leader>qd', function() require('persistence').stop() end, desc = 'Don\'t Save Current Session' },
+        { '<leader>ps', function() require('persistence').load() end, desc = 'Restore Session' },
+        { '<leader>pl', function() require('persistence').load({ last = true }) end, desc = 'Restore Last Session' },
+        { '<leader>pd', function() require('persistence').stop() end, desc = 'Don\'t Save Current Session' },
     },
     init = function()
         -- Detect if stdin has been provided.
         vim.g.started_with_stdin = false
         vim.api.nvim_create_autocmd('StdinReadPre', {
-            group = vim.api.nvim_create_augroup('c4du_persistence', {}),
+            group = vim.api.nvim_create_augroup('persistence_auto_restore', { clear = true }),
             callback = function()
                 vim.g.started_with_stdin = true
             end,
@@ -31,7 +33,7 @@ return {
             '/private/tmp',
         }
         vim.api.nvim_create_autocmd('VimEnter', {
-            group = 'c4du_persistence',
+            group = 'persistence_auto_restore',
             once = true,
             nested = true,
             callback = function()
